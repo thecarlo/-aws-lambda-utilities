@@ -4,7 +4,9 @@ Useful utilities and functions for aws lambda projects
 
 ## Using the logger
 
-Import the logger:
+The logger class uses Winston logger.
+
+Importing the logger:
 
 `import { Logger } from 'aws-lambda-utilities';`
 
