@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-utilities",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "AWS Lambda Utilities and Helper Functions",
   "main": "dist/index.min.js",
   "types": "dist/index.d.ts",
