@@ -1,0 +1,97 @@
+{
+  "name": "aws-lambda-utilities",
+  "version": "1.0.1",
+  "description": "AWS Lambda Utilities and Helper Functions",
+  "main": "dist/index.min.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && npm run check-types && webpack --mode=production",
+    "check-types": "tsc",
+    "test": "cross-env NODE_ENV=test mocha --timeout 3000 --recursive -r ts-node/register -r tsconfig-paths/register 'src/**/*.spec.ts'",
+    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=text-summary --reporter=text --reporter=lcov mocha --reporter mocha-sonarqube-reporter --reporter-options output=test-report.xml --timeout 3000 --recursive -r ts-node/register 'src/**/*.spec.ts'",
+    "debug": "node --inspect-brk nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node src/index.local.ts --require dotenv-flow/config -r",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint --fix 'src/**/*.ts'",
+    "prettier": "prettier --write 'src/**/*.ts'",
+    "prettier:fix": "prettier --check 'src/**/*.ts'",
+    "clean": "rimraf dist/"
+  },
+  "keywords": [
+    "aws",
+    "lambda"
+  ],
+  "files": [
+    "**/**/index.min.js",
+    "**/**/*.d.ts"
+  ],
+  "author": "Carlo van Wyk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecarlo/aws-lambda-utilities.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thecarlo/aws-lambda-utilities/issues"
+  },
+  "homepage": "https://github.com/thecarlo/aws-lambda-utilities#readme",
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.spec.ts",
+      "src/logger/functions/**",
+      "src/enums/**",
+      "src/mocks/**"
+    ],
+    "all": true
+  },
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.953.0",
+    "dotenv": "^10.0.0",
+    "i": "^0.3.7",
+    "joi": "^17.4.2",
+    "lodash": "^4.17.21",
+    "npm": "^7.24.1",
+    "tsconfig-paths": "^3.11.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.80",
+    "@types/chai": "^4.2.22",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/joi": "^17.2.3",
+    "@types/lodash": "^4.14.175",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.0.1",
+    "@types/sinon": "^10.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "aws-sdk-mock": "^5.2.1",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest-formatting": "^3.0.0",
+    "eslint-plugin-mocha": "^9.0.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.2",
+    "mocha": "^9.1.2",
+    "mocha-sonarqube-reporter": "^1.0.2",
+    "nodemon": "^2.0.13",
+    "nyc": "^15.1.0",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "sinon": "^11.1.1",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3",
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-node-externals": "^3.0.0"
+  }
+}

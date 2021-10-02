@@ -1,0 +1,5 @@
+export enum ENVS {
+  AWS_PROFILE = 'AWS_PROFILE',
+  AWS_REGION = 'AWS_REGION',
+  NODE_ENV = 'NODE_ENV',
+}

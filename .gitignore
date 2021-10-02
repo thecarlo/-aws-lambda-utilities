@@ -1,0 +1,8 @@
+node_modules
+.vscode
+dist
+.nyc_output/**/*
+coverage
+*.tgz
+test-report*
+*.xml
