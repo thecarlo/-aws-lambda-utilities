@@ -174,6 +174,32 @@ describe('DefaultVars()', function () {
     });
   });
 
+  describe('isLocal()', function () {
+    afterEach(function () {
+      sinon.reset();
+    });
+
+    it(`should return false when IS_LOCAL is not 'true'`, function () {
+      sinon.stub(DefaultVars.prototype, 'isLocal').callsFake(() => {
+        return false;
+      });
+
+      expect(defaultVars.isLocal()).to.eql(false);
+
+      sinon.reset();
+    });
+
+    it(`should return true when IS_LOCAL is 'true'`, function () {
+      sinon.stub(DefaultVars.prototype, 'isLocal').callsFake(() => {
+        return true;
+      });
+
+      expect(defaultVars.isLocal()).to.eql(true);
+
+      sinon.reset();
+    });
+  });
+
   describe('isTest()', function () {
     afterEach(function () {
       sinon.reset();

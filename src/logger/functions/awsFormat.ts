@@ -1,7 +1,7 @@
-import { isEmpty } from 'lodash';
 import winston, { format } from 'winston';
 
 import { appendAppDetails } from './appendAppDetails';
+import { formatMetaData } from './formatMetadata';
 
 export const awsFormat = (): winston.Logform.Format => {
   return format.combine(
@@ -20,12 +20,13 @@ export const awsFormat = (): winston.Logform.Format => {
     }),
     format((info) => {
       info.level = info.level.toUpperCase();
+
       return info;
     })(),
     format.printf((info) => {
-      return `[${info.level}] ${info.timestamp} ${info.message} ${
-        !isEmpty(info.metadata) ? JSON.stringify(info.metadata) : ''
-      }`;
+      return `[${info.level}] ${info.timestamp} ${
+        info.message
+      } ${formatMetaData(info.metadata)}`;
     }),
   );
 };

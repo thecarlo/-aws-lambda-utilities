@@ -2,6 +2,7 @@
 import { getDeploymentEnv } from './functions/getDeploymentEnv';
 import { getLogLevel } from './functions/getLogLevel';
 import { isAWS } from './functions/isAWS';
+import { isLocal } from './functions/isLocal';
 import { isProduction } from './functions/isProduction';
 import { isTest } from './functions/isTest';
 
@@ -40,8 +41,12 @@ export class DefaultVars {
     return isTest(env.NODE_ENV);
   }
 
+  isLocal(): boolean {
+    return isLocal(env.IS_LOCAL);
+  }
+
   isAWS(): boolean {
-    return isAWS(env.AWS_LAMBDA_FUNCTION_NAME);
+    return isAWS(env.IS_LOCAL, env.AWS_LAMBDA_FUNCTION_NAME);
   }
 
   isProduction(): boolean {
