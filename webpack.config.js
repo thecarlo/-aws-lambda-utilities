@@ -28,6 +28,8 @@ let config = {
   output: {
     filename: 'index.min.js',
     path: destination,
+    libraryTarget: 'umd',
+    library: 'aws-lambda-utilities',
   },
   plugins: [],
 };
