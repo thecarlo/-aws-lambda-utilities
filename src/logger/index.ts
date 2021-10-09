@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { isEmpty } from 'lodash';
+import { isObject, isString } from 'lodash';
 import winston, { createLogger } from 'winston';
 
 import { DefaultVars } from '../defaultVars';
@@ -21,9 +21,23 @@ export class Logger {
   }
 
   private emitLog(level: string, message: string, meta?: any) {
-    isEmpty(meta)
-      ? (this.logger as any)[level](message)
-      : (this.logger as any)[level](message, meta);
+    //if meta is not a string or an object, just log message
+    if (!isString(meta) && !isObject(meta)) {
+      (this.logger as any)[level](message);
+      return;
+    }
+
+    //if meta is a string, append meta to message
+    if (typeof meta === 'string') {
+      (this.logger as any)[level](`${message} ${meta}`);
+      return;
+    }
+
+    // if meta is an object and not a string, log the message and meta
+    if (isObject(meta) && !isString(meta)) {
+      (this.logger as any)[level](message, meta);
+      return;
+    }
   }
 
   public log(message: string, meta?: any): void {

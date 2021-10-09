@@ -1,12 +1,11 @@
-import { isEmpty } from 'lodash';
 import winston, { format } from 'winston';
 
 import { appendAppDetails } from './appendAppDetails';
+import { formatMetaData } from './formatMetadata';
 
 export const localFormat = (): winston.Logform.Format => {
   return format.combine(
     format.timestamp(),
-    format.splat(),
     appendAppDetails(),
     format.metadata({
       fillExcept: [
@@ -24,9 +23,9 @@ export const localFormat = (): winston.Logform.Format => {
     })(),
     format.colorize(),
     format.printf((info) => {
-      return `[${info.level}] ${info.timestamp} ${info.message} ${
-        !isEmpty(info.metadata) ? JSON.stringify(info.metadata) : ''
-      }`;
+      return `[${info.level}] ${info.timestamp} ${
+        info.message
+      } ${formatMetaData(info.metadata)}`;
     }),
   );
 };

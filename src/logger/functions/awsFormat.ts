@@ -6,7 +6,6 @@ import { formatMetaData } from './formatMetadata';
 export const awsFormat = (): winston.Logform.Format => {
   return format.combine(
     format.timestamp(),
-    format.splat(),
     appendAppDetails(),
     format.metadata({
       fillExcept: [
@@ -20,7 +19,6 @@ export const awsFormat = (): winston.Logform.Format => {
     }),
     format((info) => {
       info.level = info.level.toUpperCase();
-
       return info;
     })(),
     format.printf((info) => {
